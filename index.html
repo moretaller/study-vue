@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no">
+		<title>vue project</title>
+	</head>
+	<body>
+        <div id="app">
+			<span v-bind:title="message">{{message}}</span>
+			<span v-if="seen">看到我了哈会</span>
+			<p v-for="todo in todos">
+				{{todo.text}}
+			</p>
+			<button v-on:click="reverseMessage">逆转message</button>
+			<input type="text" v-model="message"/>
+			<h2>vue组件</h2>
+			<ol>
+				<todo-item v-for="item in todos" v-bind:todo="item" v-bind:key="item.id"></todo-item>
+			</ol>
+			<template v-if="loginType === 'username'">
+				<label>Username</label>
+				<input placeholder="Enter your username" type="number" key="input-username" v-model.trim="age">
+				<input placeholder="Enter your password" key="input-username-password">
+			</template>
+			<template v-else>
+				<label>Email</label>
+				<input placeholder="Enter your email address" key="input-email">
+				<input placeholder="Enter your password" key="input-email-password">
+			</template>
+			<button v-bind:style="{width: width, height:height}" v-on:click="changeLogin()">change</button>
+			<text-document
+			  v-bind:title.sync="doc.title"
+			></text-document>
+			<todo-list v-bind:todos="todos">
+				<template slot-scope="slotProps">
+					<span v-if="slotProps.todo.isComplate">{{slotProps.todo.title}}</span>
+					<span v-if="!slotProps.todo.isComplate">{{slotProps.todo.text}}</span>
+				</template>
+			</todo-list>
+		</div>
+	</body>
+
+</html>
